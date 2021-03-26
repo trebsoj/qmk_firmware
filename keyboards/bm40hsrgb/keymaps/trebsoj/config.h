@@ -17,9 +17,9 @@
 
 #include "config_common.h"
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 200
 
-#define TAPPING_TERM_PER_KEY
+#define TAPPING_TERM_PER_KEY 
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x4B50 // "KP"
