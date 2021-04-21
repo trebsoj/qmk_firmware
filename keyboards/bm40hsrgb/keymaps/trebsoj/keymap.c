@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [11] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO,      LCTL(KC_Z), LCTL(KC_Y), KC_NO, KC_NO, KC_NO, LCTL(KC_EQL),  KC_NO, KC_NO, KC_NO, 
-    KC_NO, KC_NO, LCTL(KC_S), KC_NO,      KC_NO,      KC_NO, KC_NO, KC_NO, LCTL(KC_MINS), KC_NO, KC_NO, KC_NO, 
+    KC_NO, KC_NO, LCTL(KC_S), LCTL(KC_D),      KC_NO,      KC_NO, KC_NO, KC_NO, LCTL(KC_MINS), KC_NO, KC_NO, KC_NO, 
     KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_NO, KC_NO, KC_NO, KC_NO,         KC_NO, KC_NO, KC_NO, 
     KC_NO, KC_NO, KC_NO,      KC_NO,      KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO,         KC_NO, KC_NO
 ),
