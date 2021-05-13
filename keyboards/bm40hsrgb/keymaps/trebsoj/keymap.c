@@ -51,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [4] = LAYOUT_planck_mit(
     KC_TRNS, KC_TRNS,       MO(5),      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,      KC_NO,        KC_HOME,    KC_UP,      KC_END,     KC_NO,   KC_TRNS, 
     KC_TRNS, LSFT(KC_LCTL), MO(7),      KC_TRNS,     LCTL(KC_LGUI), MO(9),      LSFT(KC_TAB), KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_TAB,  KC_TRNS, 
-    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),    KC_NO,      KC_NO,   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,   KC_TRNS, 
-    KC_TRNS, KC_TRNS,       KC_TRNS,    KC_TRNS,     MO(14),        KC_TRNS,    MO(15),       KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
+    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),    KC_NO,      LCTL(KC_PSLS),KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,   KC_TRNS, 
+    KC_TRNS, KC_TRNS,       KC_TRNS,    KC_TRNS,     MO(14),        KC_TRNS,                  MO(15),       KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS
 ),
 [5] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MSTP,     KC_VOLU, KC_MPLY, KC_NO, KC_NO, 
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [11] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO,      LCTL(KC_Z), LCTL(KC_Y), KC_NO, KC_NO, KC_NO, LCTL(KC_EQL),  KC_NO, KC_NO, KC_NO, 
-    KC_NO, KC_NO, LCTL(KC_S), LCTL(KC_D),      KC_NO,      KC_NO, KC_NO, KC_NO, LCTL(KC_MINS), KC_NO, KC_NO, KC_NO, 
+    KC_NO, KC_NO, LCTL(KC_S), LCTL(KC_D), LCTL(KC_F), KC_NO, KC_NO, KC_NO, LCTL(KC_MINS), KC_NO, KC_NO, KC_NO, 
     KC_NO, KC_NO, LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_NO, KC_NO, KC_NO, KC_NO,         KC_NO, KC_NO, KC_NO, 
     KC_NO, KC_NO, KC_NO,      KC_NO,      KC_NO,      KC_NO, KC_NO, KC_NO, KC_NO,         KC_NO, KC_NO
 ),
