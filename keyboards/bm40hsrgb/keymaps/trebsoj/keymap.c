@@ -16,7 +16,9 @@
 #include QMK_KEYBOARD_H
 
 enum {
-    TD_ALT_CAPS
+    TD_ALT_CAPS,
+    TD_PASTE,
+    TD_COPY
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,10 +37,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* CALC */
 [2] = LAYOUT_planck_mit(
-    KC_TRNS, KC_NO,      KC_NO,      LCTL(KC_Z), LCTL(KC_Y), LCTL(KC_T), KC_PERC,     KC_P7,    KC_P8,    KC_P9,    KC_PPLS, KC_TRNS, 
-    KC_TRNS, LCTL(KC_A), KC_NO,      MO(4),      KC_NO,      KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, LALT(KC_ENT), 
-    KC_TRNS, KC_NO,      LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_NO,      KC_NO,       KC_P1,    KC_P2,    KC_P3,    KC_PAST, KC_TRNS, 
-    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                 KC_P0,    KC_PDOT,  KC_COMM,  KC_PSLS, KC_EQL
+    KC_TRNS, KC_NO,      LCTL(KC_F2),LCTL(KC_Z), LCTL(KC_Y),   LCTL(KC_T), KC_PERC,     KC_P7,    KC_P8,    KC_P9,    KC_PPLS, KC_TRNS, 
+    KC_TRNS, LCTL(KC_A), LCTL(KC_S), MO(4),      KC_NO,        KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, LALT(KC_ENT), 
+    KC_TRNS, KC_NO,      LCTL(KC_X), TD(TD_COPY),TD(TD_PASTE), KC_NO,      KC_NO,       KC_P1,    KC_P2,    KC_P3,    KC_PAST, KC_TRNS, 
+    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,                 KC_P0,    KC_PDOT,  KC_COMM,  KC_PSLS, KC_EQL
 ),
 /* RGB */
 [3] = LAYOUT_planck_mit(
@@ -73,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
 ),
 [8] = LAYOUT_planck_mit(
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LCTL(KC_F4), LALT(KC_F4), 
-    KC_CAPS, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_L), KC_NO, KC_NO, 
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
-    KC_NO, KC_NO, KC_NO, SGUI(KC_S), KC_PSCR, KC_NO, LALT(KC_G), KC_NO, KC_NO, KC_NO, LCA(KC_DEL)
+    KC_NO,   KC_NO, KC_NO,   KC_NO,      KC_NO,   KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, LCTL(KC_F4), LALT(KC_F4), 
+    KC_CAPS, KC_NO, KC_TRNS, KC_NO,      KC_NO,   KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO,       KC_NO, 
+    KC_NO,   KC_NO, KC_NO,   KC_NO,      KC_NO,   KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO,       KC_NO, 
+    KC_NO,   KC_NO, KC_NO,   SGUI(KC_S), KC_PSCR, KC_NO,        LALT(KC_G), KC_NO, KC_NO, KC_NO,       LCA(KC_DEL)
 ),
 [9] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_WH_U, KC_NO, KC_NO, KC_NO, 
@@ -126,7 +128,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* NO HO FAIG SERVIR DE MOMENT, ÉS PER FER DOBLE TOC A UNA TECLA */
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_ALT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_CAPS)
+    [TD_ALT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LALT, KC_CAPS),
+    [TD_PASTE] = ACTION_TAP_DANCE_DOUBLE(LCTL(KC_V), LCA(KC_V)),
+    [TD_COPY] = ACTION_TAP_DANCE_DOUBLE(LCTL(KC_C), LCA(KC_C))
 };
 
 /*  REDEFINIM ELS TEMPS DE TAPPING PER LES TECLES QUE HAN DE CANVIAR DE CAPA
