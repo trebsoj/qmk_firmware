@@ -1,3 +1,0 @@
-vim  ~/projects/qmk_firmware/keyboards/bm40hsrgb/keymaps/trebsoj/keymap.c
-
-qmk flash -kb bm40hsrgb -km trebsoj
