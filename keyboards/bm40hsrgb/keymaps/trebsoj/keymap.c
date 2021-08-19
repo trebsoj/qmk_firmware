@@ -51,10 +51,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* DIRECCIO */
 [4] = LAYOUT_planck_mit(
-    KC_TRNS, LCTL(KC_F2),   MO(5),      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,    KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_NO,   KC_TRNS,
-    KC_TRNS, LSFT(KC_LCTL), MO(7),      LCTL(KC_D),  LCTL(KC_LGUI), MO(9),    LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
-    KC_TRNS, KC_LCTL,       LCTL(KC_X), TD(TD_COPY), TD(TD_PASTE),  LCTL(KC_F2),  LCTL(KC_PSLS),LCTL(KC_F3), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_TRNS,       KC_TRNS,    MO(14),      KC_TRNS,       KC_TRNS,                MO(15),      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    KC_TRNS, LCTL(KC_F2),   MO(5),      LCTL(KC_Z),  LCTL(KC_Y),    MO(9),        KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_NO,   KC_TRNS,
+    KC_TRNS, LSFT(KC_LCTL), LCTL(KC_S), LCTL(KC_D),  LCTL(KC_LGUI), MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
+    KC_TRNS, KC_LCTL,       LCTL(KC_X), TD(TD_COPY), TD(TD_PASTE),  LCTL(KC_F2),  LCTL(KC_PSLS),LCA(KC_TAB), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS,       KC_TRNS,    MO(14),      KC_TRNS,       KC_TRNS,                    MO(15),      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [5] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MSTP,     KC_VOLU, KC_MPLY, KC_NO, KC_NO,
