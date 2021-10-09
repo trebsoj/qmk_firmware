@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* CALC */
 [2] = LAYOUT_planck_mit(
     KC_TRNS, KC_NO,      KC_NO,         KC_NO,      KC_NO,        LCTL(KC_T), KC_PERC,     KC_P7,    KC_P8,    KC_P9,    KC_PPLS, KC_TRNS,
-    KC_TRNS, KC_NO,      KC_NO,         KC_NO,      KC_NO,        KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, LALT(KC_ENT),
+    KC_TRNS, KC_NO,      KC_NO,         KC_NO,      KC_NO,        KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, KC_ENT,
     KC_TRNS, KC_NO,      KC_NO,         KC_NO,      KC_NO,        KC_NO,      KC_PCMM,     KC_P1,    KC_P2,    KC_P3,    KC_PAST, KC_TRNS,
     KC_TRNS, KC_TRNS,    KC_TRNS,       KC_TRNS,    MO(4),        KC_TRNS,                 KC_P0,    KC_TRNS,  KC_PDOT,  KC_PSLS, KC_EQL
 ),
@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* DIRECCIO */
 [4] = LAYOUT_planck_mit(
-    KC_TRNS, LCTL(KC_F2),   MO(5),      LCTL(KC_Z),  LCTL(KC_Y),    MO(9),        KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_NO,   KC_TRNS,
+    KC_TRNS, LCTL(KC_F2),   MO(5),      LCTL(KC_Z),  LCTL(KC_Y),    LCTL(KC_T),   KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_NO,   KC_TRNS,
     KC_TRNS, LSFT(KC_LCTL), LCTL(KC_S), LCTL(KC_D),  LCTL(KC_LGUI), MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
     KC_TRNS, KC_LCTL,       LCTL(KC_X), TD(TD_COPY), TD(TD_PASTE),  LCTL(KC_F2),  LCTL(KC_PSLS),LCA(KC_TAB), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_TRNS,    KC_TRNS,     KC_TRNS,       KC_TRNS,                    MO(15),      MO(14),  KC_TRNS, KC_TRNS, KC_TRNS
@@ -73,13 +73,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, LCTL(KC_HOME), KC_PGUP, LCTL(KC_END),  KC_NO, KC_TRNS,
     KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO,   KC_NO, LCTL(KC_PGUP), KC_PGDN, LCTL(KC_PGDN), KC_NO, KC_TRNS,
     KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO, KC_NO,         KC_NO,   KC_NO,         KC_NO, KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_NO,         KC_NO,   KC_NO,         KC_NO, KC_NO
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(9), KC_TRNS,        KC_NO,         KC_NO,   KC_NO,         KC_NO, KC_NO
 ),
 [8] = LAYOUT_planck_mit(
-    KC_NO,  KC_NO,      KC_NO,      KC_NO,      LCTL(KC_R), LCTL(KC_T), KC_NO,      KC_NO,      LCTL(KC_EQL),   KC_NO, LCTL(KC_F4), LALT(KC_F4),
-    KC_NO,  LCTL(KC_A), LCTL(KC_S), LCTL(KC_D), LCTL(KC_F), LCTL(KC_G), LCTL(KC_H), KC_NO,      LCTL(KC_MINS),  KC_NO, KC_NO,       KC_NO,
-    KC_NO,  KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,          KC_NO, KC_NO,       KC_NO,
-    KC_NO,  KC_NO,      KC_NO,      SGUI(KC_S), KC_NO,    KC_NO,                  LALT(KC_G), KC_NO,          KC_NO, KC_NO,       LCA(KC_DEL)
+    KC_TRNS,  KC_NO,      KC_NO,      KC_NO,      LCTL(KC_R), LCTL(KC_T), KC_NO,      KC_NO,      LCTL(KC_EQL),   KC_NO, LCTL(KC_F4), LALT(KC_F4),
+    KC_TRNS,  LCTL(KC_A), LCTL(KC_S), LCTL(KC_D), LCTL(KC_F), LCTL(KC_G), LCTL(KC_H), KC_NO,      LCTL(KC_MINS),  KC_NO, KC_NO,       LALT(KC_ENT),
+    KC_TRNS,  KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,          KC_NO, KC_NO,       KC_NO,
+    KC_TRNS,  KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                LALT(KC_G), KC_NO,          KC_NO, KC_NO,       LCA(KC_DEL)
 ),
 [9] = LAYOUT_planck_mit(
     KC_NO, KC_NO, KC_NO,   KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,   KC_WH_U, KC_NO,   KC_NO, KC_NO,
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* CALC COPY */
 [14] = LAYOUT_planck_mit(
     KC_TRNS, KC_NO,   KC_NO,      LCTL(KC_Z), LCTL(KC_Y), KC_NO,   KC_PERC, KC_7,    KC_8,    KC_9,    KC_PPLS, KC_TRNS,
-    KC_TRNS, KC_NO,   KC_NO,      KC_NO,      KC_NO,      KC_NO,   KC_CIRC, KC_4,    KC_5,    KC_6,    KC_PMNS, LALT(KC_ENT),
+    KC_TRNS, KC_NO,   KC_NO,      KC_NO,      KC_NO,      KC_NO,   KC_CIRC, KC_4,    KC_5,    KC_6,    KC_PMNS, KC_ENT,
     KC_TRNS, KC_NO,   KC_NO,      KC_NO,      KC_NO,      KC_NO,   KC_PCMM, KC_1,    KC_2,    KC_3,    KC_PAST, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,          KC_0,    KC_TRNS, KC_PDOT, KC_PSLS, KC_EQL
 ),
