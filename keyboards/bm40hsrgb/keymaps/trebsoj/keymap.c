@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [4] = LAYOUT_planck_mit(
     KC_TRNS, LCTL(KC_F2),   LCTL(KC_A),      LCTL(KC_Z),  LCTL(KC_Y),    MO(5),   KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_NO,   KC_TRNS,
     KC_TRNS, LSFT(KC_LCTL), LCTL(KC_S), LCTL(KC_D),  LCTL(KC_LGUI), MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
-    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  LCTL(KC_F),  LCTL(KC_PSLS),LCA(KC_TAB), KC_LGUI, RCS(KC_U), KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  LCTL(KC_F),  LCTL(KC_PSLS),LCA(KC_TAB), KC_LGUI, LCTL(KC_F2), KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_TRNS,    MO(14),     KC_NO,       KC_TRNS,                    MO(15),      KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [5] = LAYOUT_planck_mit(
