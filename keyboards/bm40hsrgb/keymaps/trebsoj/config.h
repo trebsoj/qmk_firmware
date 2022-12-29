@@ -54,3 +54,6 @@
 #ifdef RGB_DI_PIN
     #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
 #endif
+
+#define FORCE_NKRO
+#define COMBO_COUNT 1

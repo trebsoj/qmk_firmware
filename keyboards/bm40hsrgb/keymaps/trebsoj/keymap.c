@@ -19,6 +19,10 @@ enum {
     TD_CAPS_PRINT,
 };
 
+enum combos {
+  LOCK
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       KC_W,     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
@@ -128,6 +132,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* NO HO FAIG SERVIR DE MOMENT, ÉS PER FER DOBLE TOC A UNA TECLA */
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
+};
+
+const uint16_t PROGMEM lock_combo[] = {KC_T, KC_Y, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+  [LOCK] = COMBO(lock_combo, LGUI(KC_L))
 };
 
 /*  REDEFINIM ELS TEMPS DE TAPPING PER LES TECLES QUE HAN DE CANVIAR DE CAPA
