@@ -56,4 +56,4 @@
 #endif
 
 #define FORCE_NKRO
-#define COMBO_COUNT 1
+#define COMBO_COUNT 2

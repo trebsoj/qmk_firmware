@@ -16,11 +16,7 @@
 #include QMK_KEYBOARD_H
 
 enum {
-    TD_CAPS_PRINT,
-};
-
-enum combos {
-  LOCK
+    TD_CAPS_PRINT
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -129,14 +125,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 
-/* NO HO FAIG SERVIR DE MOMENT, ÉS PER FER DOBLE TOC A UNA TECLA */
+/* DOBLE TOC A UNA TECLA */
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
+    [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR)
 };
 
-const uint16_t PROGMEM lock_combo[] = {KC_T, KC_Y, COMBO_END};
+const uint16_t PROGMEM combo_lock[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM combo_copy[] = {LCTL(KC_C),  LCTL(KC_V), COMBO_END};
+// COMBO_COUNT configurat en el fitxer config.h
 combo_t key_combos[COMBO_COUNT] = {
-  [LOCK] = COMBO(lock_combo, LGUI(KC_L))
+  COMBO(combo_lock, LGUI(KC_L)),
+  COMBO(combo_copy, LGUI(KC_V)),
 };
 
 /*  REDEFINIM ELS TEMPS DE TAPPING PER LES TECLES QUE HAN DE CANVIAR DE CAPA
