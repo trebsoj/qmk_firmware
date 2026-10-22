@@ -22,11 +22,13 @@
 */
 enum {
     TD_CAPS_PRINT,
-    TD_WIN_FULL
+    TD_WIN_FULL,
+    TD_J_CTRLJ
 };
 tap_dance_action_t tap_dance_actions[] = {
     [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
-    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP))
+    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP)),
+    [TD_J_CTRLJ] = ACTION_TAP_DANCE_DOUBLE(KC_J, LCTL(KC_J))
 };
 
 
@@ -54,15 +56,15 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
-    KC_TAB,         KC_A,       KC_S,     KC_D,   KC_F,  KC_G,        KC_H,   KC_J,   KC_K,     KC_L,    KC_SCLN,  KC_ENT,
+    KC_TAB,         KC_A,       KC_S,     KC_D,   KC_F,  KC_G,        KC_H,   TD(TD_J_CTRLJ),   KC_K,     KC_L,    KC_SCLN,  KC_ENT,
     KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
     LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_CAPS_PRINT),  LT(10,KC_QUOT)
 ),
 /* SIMBOLS */
 [1] = LAYOUT_planck_mit(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,     KC_PERC, KC_AMPR,   KC_LPRN, KC_RPRN, KC_QUES,       KC_PPLS, KC_TRNS,
-    KC_TRNS, KC_EQL,  KC_NO,   MO(4),   RALT(KC_5), KC_CIRC, KC_PIPE,   KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
-    KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_QUES,    KC_BSLS, KC_SLSH,   KC_LBRC, KC_RBRC, KC_NO,       KC_NO,  KC_TRNS,
+    KC_TRNS, KC_EQL,  KC_TRNS, MO(4),   RALT(KC_5), KC_CIRC, KC_PIPE,   KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_QUES,    KC_BSLS, KC_SLSH,   KC_LBRC, KC_RBRC, KC_TRNS,     KC_TRNS,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   MO(4),      KC_TRNS,            KC_TRNS, LALT(KC_C), KC_NO,         KC_NO,  KC_NO
 ),
 /* CALC */
@@ -151,8 +153,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* SIMBOLS COPY */
 [15] = LAYOUT_planck_mit(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,     KC_PERC, KC_AMPR, KC_LPRN, KC_RPRN, KC_QUES,       KC_PPLS, KC_TRNS,
-    KC_TRNS, KC_EQL,  KC_NO,   KC_NO,   RALT(KC_5), KC_CIRC, KC_PIPE, KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
-    KC_TRNS, KC_NO,   KC_NO,   LCA(KC_C),   LCA(KC_V),    KC_BSLS, KC_SLSH, KC_LBRC, KC_RBRC, KC_TRNS,       KC_NO,  KC_TRNS,
+    KC_TRNS, KC_EQL,  KC_TRNS, KC_TRNS, RALT(KC_5), KC_CIRC, KC_PIPE, KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, LCA(KC_C),   LCA(KC_V),    KC_BSLS, KC_SLSH, KC_LBRC, KC_RBRC, KC_TRNS,       KC_TRNS,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,      KC_TRNS,          KC_TRNS, KC_NO,   KC_NO,         KC_NO,  KC_NO
 )
 };
