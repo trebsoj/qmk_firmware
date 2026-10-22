@@ -388,6 +388,10 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
     ConfigSuccess &= Endpoint_ConfigureEndpoint((DIGITIZER_IN_EPNUM | ENDPOINT_DIR_IN), EP_TYPE_INTERRUPT, DIGITIZER_EPSIZE, 1);
 #endif
 
+    /* ConfigSuccess aggregates the endpoint setup results but is never read;
+       silence -Wunused-but-set-variable without changing behaviour. */
+    (void)ConfigSuccess;
+
     usb_device_state_set_configuration(USB_DeviceState == DEVICE_STATE_Configured, USB_Device_ConfigurationNumber);
 }
 
