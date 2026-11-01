@@ -56,7 +56,7 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
-    KC_TAB,         KC_A,       KC_S,     KC_D,   KC_F,  KC_G,        KC_H,   TD(TD_J_CTRLJ),   KC_K,     KC_L,    KC_SCLN,  KC_ENT,
+    KC_TAB,         LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,   KC_H, RSFT_T(KC_J), RCTL_T(KC_K), LALT_T(KC_L), RGUI_T(KC_SCLN), KC_ENT,
     KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
     LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_CAPS_PRINT),  LT(10,KC_QUOT)
 ),
@@ -158,3 +158,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,      KC_TRNS,          KC_TRNS, KC_NO,   KC_NO,         KC_NO,  KC_NO
 )
 };
+
+/*
+    ======================================================================================================================
+        HOME ROW MODS: TAPPING TERM PER FINGER (PINKY SLOWEST, INDEX FASTEST)
+    ======================================================================================================================
+*/
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_A):
+        case RGUI_T(KC_SCLN):
+            return 220;
+        case LALT_T(KC_S):
+        case LALT_T(KC_L):
+            return 200;
+        case LCTL_T(KC_D):
+        case RCTL_T(KC_K):
+            return 190;
+        case LSFT_T(KC_F):
+        case RSFT_T(KC_J):
+            return 160;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+// Chordal Hold: matrix columns 0-5 are the left hand, 6-11 the right hand
+char chordal_hold_handedness(keypos_t key) {
+    return (key.col < MATRIX_COLS / 2) ? 'L' : 'R';
+}

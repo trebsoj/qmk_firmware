@@ -17,7 +17,9 @@
 
 #define TAPPING_TERM 150
 
-#define TAPPING_TERM_PER_KEY 
+#define TAPPING_TERM_PER_KEY
+#define PERMISSIVE_HOLD
+#define CHORDAL_HOLD
 
 /* key matrix size */
 #define MATRIX_ROWS 4
