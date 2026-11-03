@@ -15,6 +15,21 @@
  */
 #include QMK_KEYBOARD_H
 
+/*
+    ======================================================================================================================
+        DOBLE TOC A UNA TECLA
+    ======================================================================================================================
+*/
+enum {
+    TD_CAPS_PRINT,
+    TD_WIN_FULL,
+    TD_J_CTRLJ
+};
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
+    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP)),
+    [TD_J_CTRLJ] = ACTION_TAP_DANCE_DOUBLE(KC_J, LCTL(KC_J))
+};
 
 
 
@@ -23,7 +38,7 @@
         COMBOS
     ======================================================================================================================
 */
-const uint16_t PROGMEM combo_lock [] = {KC_ESC, KC_Q, COMBO_END};
+const uint16_t PROGMEM combo_lock [] = {LT(12,KC_Z), KC_X, COMBO_END};
 //const uint16_t PROGMEM combo_copy[] = {LCTL(KC_C),  LCTL(KC_V), COMBO_END};
 // COMBO_COUNT configurat en el fitxer config.h
 combo_t key_combos[] = {
@@ -41,14 +56,14 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
-    KC_TAB,         LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,   KC_H, RSFT_T(KC_J), RCTL_T(KC_K), LALT_T(KC_L), RGUI_T(KC_SCLN), KC_ENT,
-    KC_NO,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
-    KC_GRV, KC_CAPS,    KC_NO,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, KC_PSCR,  LT(10,KC_QUOT)
+    KC_TAB,         KC_A,       KC_S,     KC_D,   KC_F,  KC_G,        KC_H,   TD(TD_J_CTRLJ),   KC_K,     KC_L,    KC_SCLN,  KC_ENT,
+    KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
+    LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_CAPS_PRINT),  LT(10,KC_QUOT)
 ),
 /* SIMBOLS */
 [1] = LAYOUT_planck_mit(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,     KC_PERC, KC_AMPR,   KC_LPRN, KC_RPRN, KC_QUES,       KC_PPLS, KC_TRNS,
-    KC_TRNS, KC_EQL,  KC_TRNS, KC_TRNS,   RALT(KC_5), KC_CIRC, KC_PIPE,   KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
+    KC_TRNS, KC_EQL,  KC_TRNS, MO(4),   RALT(KC_5), KC_CIRC, KC_PIPE,   KC_LCBR, KC_RCBR, RALT(KC_SLSH), KC_PMNS,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_QUES,    KC_BSLS, KC_SLSH,   KC_LBRC, KC_RBRC, KC_TRNS,     KC_TRNS,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   MO(4),      KC_TRNS,            KC_TRNS, LALT(KC_C), KC_NO,         KC_NO,  KC_NO
 ),
@@ -68,16 +83,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* DIRECCIO */
 [4] = LAYOUT_planck_mit(
-    KC_TRNS, HYPR(KC_P1),   KC_NO,      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,   KC_HOME,        KC_PGDN,     KC_PGUP,   KC_END,  KC_NO,   KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_NO,        KC_LEFT, KC_DOWN,     KC_UP, KC_RGHT, KC_NO,  KC_TRNS,
-    KC_NO, KC_NO,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  KC_NO,  LCTL(KC_PSLS),LCTL(KC_F2), KC_LGUI, LCTL(KC_F3), KC_NO, KC_TRNS,
-    KC_NO, KC_NO,       KC_NO,    MO(14),     KC_NO,       KC_TRNS,                    MO(15),      KC_NO,  KC_NO, KC_NO, KC_NO
+    KC_TRNS, HYPR(KC_P1),   LCTL(KC_A),      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,   KC_NO,        KC_HOME,     KC_UP,   KC_END,  LCTL(KC_P),   KC_TRNS,
+    KC_TRNS, LSFT(KC_LCTL), LCTL(KC_S), LCTL(KC_D),  LCTL(KC_F), MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
+    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  LCTL(KC_B),  LCTL(KC_PSLS),LCTL(KC_F2), KC_LGUI, LCTL(KC_F3), KC_TRNS, KC_TRNS,
+    KC_TRNS, KC_TRNS,       KC_TRNS,    MO(14),     KC_NO,       KC_TRNS,                    MO(15),      KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [5] = LAYOUT_planck_mit(
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MSTP,     KC_NO, KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_MPRV, KC_VOLD,     KC_VOLU, KC_MNXT, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MUTE,       KC_NO, KC_NO,   KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_MPLY, KC_NO, LGUI(KC_F1), KC_NO,   KC_NO,   KC_NO
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MSTP,     KC_VOLU, KC_MPLY, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_MPRV,     KC_VOLD, KC_MNXT, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO,       KC_MUTE, KC_NO,   KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO, KC_NO, LGUI(KC_F1), KC_NO,   KC_NO,   KC_NO
 ),
 /* Functions */
 [6] = LAYOUT_planck_mit(
@@ -87,8 +102,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,     KC_TRNS,       KC_TRNS,                KC_NO,      KC_TRNS,    KC_TRNS,    KC_NO,      KC_NO
 ),
 [7] = LAYOUT_planck_mit(
-    KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO, KC_TRNS,
-    KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS,
+    KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, LCTL(KC_HOME), KC_PGUP, LCTL(KC_END),  KC_NO, KC_TRNS,
+    KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO,   KC_NO, LCTL(KC_PGUP), KC_PGDN, LCTL(KC_PGDN), KC_NO, KC_TRNS,
     KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO, KC_NO,         KC_NO,   KC_NO,         KC_NO, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_NO,         KC_NO,   KC_NO,         KC_NO, KC_NO
 ),
@@ -111,14 +126,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, KC_NO,        KC_NO,        KC_NO,        MO(3),          KC_NO,                      KC_TRNS,      KC_NO,        KC_NO,        KC_NO,        KC_NO
 ),
 [11] = LAYOUT_planck_mit(
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  LGUI(KC_PGUP),  KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_LEFT), LGUI(KC_DOWN),  LGUI(KC_UP),  LGUI(KC_RGHT), KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  TD(TD_WIN_FULL),  KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_LEFT),  LGUI(KC_DOWN),  LGUI(KC_RGHT), KC_NO, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO
 ),
 [12] = LAYOUT_planck_mit(
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO, KC_NO,
-    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, LCTL(KC_MINS),  LCTL(KC_EQL),  KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  LCTL(KC_EQL),  KC_NO, KC_NO, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  LCTL(KC_MINS),  KC_NO, KC_NO, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO, KC_NO,
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO
 ),
@@ -143,50 +158,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,      KC_TRNS,          KC_TRNS, KC_NO,   KC_NO,         KC_NO,  KC_NO
 )
 };
-
-/*
-    ======================================================================================================================
-        HOME ROW MODS: TAPPING TERM PER FINGER (PINKY SLOWEST, INDEX FASTEST)
-    ======================================================================================================================
-*/
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LGUI_T(KC_A):
-        case RGUI_T(KC_SCLN):
-            return 220;
-        case LALT_T(KC_S):
-        case LALT_T(KC_L):
-            return 200;
-        case LCTL_T(KC_D):
-        case RCTL_T(KC_K):
-            return 190;
-        case LSFT_T(KC_F):
-        case RSFT_T(KC_J):
-            return 160;
-        default:
-            return TAPPING_TERM;
-    }
-}
-
-// Chordal Hold: matrix columns 0-5 are the left hand, 6-11 the right hand
-char chordal_hold_handedness(keypos_t key) {
-    return (key.col < MATRIX_COLS / 2) ? 'L' : 'R';
-}
-
-// Home row mods become modifiers as soon as an opposite-hand key is pressed
-// (Chordal Hold keeps same-hand keys as taps). Layer-tap keys are unaffected.
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LGUI_T(KC_A):
-        case LALT_T(KC_S):
-        case LCTL_T(KC_D):
-        case LSFT_T(KC_F):
-        case RSFT_T(KC_J):
-        case RCTL_T(KC_K):
-        case LALT_T(KC_L):
-        case RGUI_T(KC_SCLN):
-            return true;
-        default:
-            return false;
-    }
-}
