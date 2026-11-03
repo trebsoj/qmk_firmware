@@ -21,11 +21,9 @@
     ======================================================================================================================
 */
 enum {
-    TD_CAPS_PRINT,
     TD_WIN_FULL
 };
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
     [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP))
 };
 
@@ -56,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
     KC_TAB,         LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,   KC_H, RCTL_T(KC_J), RALT_T(KC_K), RGUI_T(KC_L), RSFT_T(KC_SCLN), KC_ENT,
     KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
-    LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_CAPS_PRINT),  LT(10,KC_QUOT)
+    LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, LT(0,KC_CAPS),  LT(10,KC_QUOT)
 ),
 /* SIMBOLS */
 [1] = LAYOUT_planck_mit(
@@ -223,4 +221,13 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_
         return FLOW_TAP_TERM;
     }
     return 0;
+}
+
+// Tap: Caps Lock. Hold: Print Screen (LT on layer 0 is only used for its tap/hold behavior).
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode == LT(0, KC_CAPS) && record->tap.count == 0 && record->event.pressed) {
+        tap_code(KC_PSCR);
+        return false;
+    }
+    return true;
 }
