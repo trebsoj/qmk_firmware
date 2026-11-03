@@ -22,13 +22,11 @@
 */
 enum {
     TD_CAPS_PRINT,
-    TD_WIN_FULL,
-    TD_J_CTRLJ
+    TD_WIN_FULL
 };
 tap_dance_action_t tap_dance_actions[] = {
     [TD_CAPS_PRINT] = ACTION_TAP_DANCE_DOUBLE(KC_CAPS, KC_PSCR),
-    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP)),
-    [TD_J_CTRLJ] = ACTION_TAP_DANCE_DOUBLE(KC_J, LCTL(KC_J))
+    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP))
 };
 
 
@@ -56,7 +54,7 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
-    KC_TAB,         KC_A,       KC_S,     KC_D,   KC_F,  KC_G,        KC_H,   TD(TD_J_CTRLJ),   KC_K,     KC_L,    KC_SCLN,  KC_ENT,
+    KC_TAB,         LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,   KC_H, RCTL_T(KC_J), RALT_T(KC_K), RGUI_T(KC_L), RSFT_T(KC_SCLN), KC_ENT,
     KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
     LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_CAPS_PRINT),  LT(10,KC_QUOT)
 ),
@@ -158,3 +156,71 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO,      KC_TRNS,          KC_TRNS, KC_NO,   KC_NO,         KC_NO,  KC_NO
 )
 };
+
+/*
+    ======================================================================================================================
+        HOME ROW MODS (SHIFT, GUI, ALT, CTRL FROM PINKY TO INDEX)
+    ======================================================================================================================
+*/
+static bool is_home_row_mod(uint16_t keycode) {
+    switch (keycode) {
+        case LSFT_T(KC_A):
+        case LGUI_T(KC_S):
+        case LALT_T(KC_D):
+        case LCTL_T(KC_F):
+        case RCTL_T(KC_J):
+        case RALT_T(KC_K):
+        case RGUI_T(KC_L):
+        case RSFT_T(KC_SCLN):
+            return true;
+        default:
+            return false;
+    }
+}
+
+// Tapping term per finger: pinky slowest, index fastest.
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LSFT_T(KC_A):
+        case RSFT_T(KC_SCLN):
+            return 220;
+        case LGUI_T(KC_S):
+        case RGUI_T(KC_L):
+            return 200;
+        case LALT_T(KC_D):
+        case RALT_T(KC_K):
+            return 190;
+        case LCTL_T(KC_F):
+        case RCTL_T(KC_J):
+            return 160;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
+// Permissive Hold only for the home row mods; layer-taps keep their old behavior.
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    return is_home_row_mod(keycode);
+}
+
+// Chordal Hold: matrix columns 0-5 are the left hand, 6-11 the right hand.
+char chordal_hold_handedness(keypos_t key) {
+    return (key.col < MATRIX_COLS / 2) ? 'L' : 'R';
+}
+
+// Same-hand chords stay taps for the home row mods only; other tap-hold keys always chord.
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t *other_record) {
+    if (!is_home_row_mod(tap_hold_keycode)) {
+        return true;
+    }
+    return get_chordal_hold_default(tap_hold_record, other_record);
+}
+
+// Flow Tap only for the home row mods: right after typing, they act as plain letters.
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
+    if (is_home_row_mod(keycode)) {
+        return FLOW_TAP_TERM;
+    }
+    return 0;
+}
