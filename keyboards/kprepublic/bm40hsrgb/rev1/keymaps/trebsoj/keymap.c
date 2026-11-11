@@ -21,10 +21,13 @@
     ======================================================================================================================
 */
 enum {
-    TD_WIN_FULL
+    TD_WIN_FULL,
+    TD_PSCR_CAPS
 };
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP))
+    [TD_WIN_FULL] = ACTION_TAP_DANCE_DOUBLE(LGUI(KC_UP), LGUI(KC_PGUP)),
+    // 1 tap: Print Screen. 2 taps: Caps Lock.
+    [TD_PSCR_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_PSCR, KC_CAPS)
 };
 
 
@@ -52,9 +55,9 @@ combo_t key_combos[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_planck_mit(
     KC_ESC,         KC_Q,       LT(11,KC_W),     KC_E,   KC_R,  KC_T,        KC_Y,   KC_U,   KC_I,     KC_O,    KC_P,     KC_BSPC,
-    KC_TAB,         LSFT_T(KC_A), LGUI_T(KC_S), LALT_T(KC_D), LCTL_T(KC_F), KC_G,   KC_H, RCTL_T(KC_J), RALT_T(KC_K), RGUI_T(KC_L), RSFT_T(KC_SCLN), KC_ENT,
+    KC_TAB,         LGUI_T(KC_A), LALT_T(KC_S), LSFT_T(KC_D), LCTL_T(KC_F), KC_G,   KC_H, RCTL_T(KC_J), RSFT_T(KC_K), RALT_T(KC_L), RGUI_T(KC_SCLN), KC_ENT,
     KC_LSFT,        LT(12,KC_Z),       KC_X,     KC_C,   LT(5,KC_V),  KC_B,        KC_N,   KC_M,   KC_COMM,  KC_DOT,  KC_MINS,  KC_DEL,
-    LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, LT(0,KC_CAPS),  LT(10,KC_QUOT)
+    LCTL_T(KC_GRV), KC_LGUI,    KC_LALT,  MO(2),  MO(4), LT(6,KC_SPC),        MO(1),  MO(8),    KC_RALT, TD(TD_PSCR_CAPS),  LT(10,KC_QUOT)
 ),
 /* SIMBOLS */
 [1] = LAYOUT_planck_mit(
@@ -66,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* CALC */
 [2] = LAYOUT_planck_mit(
     KC_NUM, KC_NO,      KC_NO,         KC_NO,      KC_NO,        KC_NO, KC_PERC,     KC_P7,    KC_P8,    KC_P9,    KC_PPLS, KC_TRNS,
-    KC_TRNS, LCTL(KC_A),      KC_NO,         KC_NO,      KC_NO,        KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, LALT(KC_ENT),
+    KC_TRNS, KC_TRNS,      KC_TRNS,         KC_TRNS,      KC_TRNS,        KC_NO,      KC_CIRC,     KC_P4,    KC_P5,    KC_P6,    KC_PMNS, LALT(KC_ENT),
     KC_TRNS, KC_NO,      KC_NO,         LCA(KC_C),      LCA(KC_V),        KC_NO,      KC_PCMM,     KC_P1,    KC_P2,    KC_P3,    KC_PAST, KC_TRNS,
     KC_TRNS, KC_TRNS,    KC_TRNS,       KC_TRNS,    MO(4),        KC_TRNS,                 KC_P0,    KC_PDOT,  KC_COMM,  KC_PSLS, KC_EQL
 ),
@@ -79,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* DIRECCIO */
 [4] = LAYOUT_planck_mit(
-    KC_TRNS, HYPR(KC_P1),   LCTL(KC_A),      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,   KC_NO,        KC_HOME,     KC_UP,   KC_END,  LCTL(KC_P),   KC_TRNS,
-    KC_TRNS, LSFT(KC_LCTL), LCTL(KC_S), LCTL(KC_D),  LCTL(KC_F), MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
-    KC_TRNS, KC_LCTL,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  LCTL(KC_B),  LCTL(KC_PSLS),LCTL(KC_F2), KC_LGUI, LCTL(KC_F3), KC_TRNS, KC_TRNS,
+    KC_TRNS, HYPR(KC_P1),   LCTL(KC_A),      LCTL(KC_Z),  LCTL(KC_Y),    KC_NO,   KC_NO,        KC_HOME,     KC_UP,   KC_END,  KC_TRNS,   KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, MO(7),        LSFT(KC_TAB), KC_LEFT,     KC_DOWN, KC_RGHT, KC_TAB,  KC_TRNS,
+    KC_TRNS, KC_TRNS,       LCTL(KC_X), LCTL(KC_C),  LCTL(KC_V),  LCTL(KC_B),  LCTL(KC_PSLS),LCTL(KC_F2), KC_LGUI, LCTL(KC_F3), KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_TRNS,    MO(14),     KC_NO,       KC_TRNS,                    MO(15),      KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [5] = LAYOUT_planck_mit(
@@ -217,17 +220,12 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record,
 
 // Flow Tap only for the home row mods: right after typing, they act as plain letters.
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
-    if (is_home_row_mod(keycode)) {
-        return FLOW_TAP_TERM;
+    switch (keycode) {
+        // Index Ctrl: short window so Ctrl+C right after typing is not forced to a tap.
+        case LCTL_T(KC_F):
+        case RCTL_T(KC_J):
+            return 80;
+        default:
+            return is_home_row_mod(keycode) ? FLOW_TAP_TERM : 0;
     }
-    return 0;
-}
-
-// Tap: Caps Lock. Hold: Print Screen (LT on layer 0 is only used for its tap/hold behavior).
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (keycode == LT(0, KC_CAPS) && record->tap.count == 0 && record->event.pressed) {
-        tap_code(KC_PSCR);
-        return false;
-    }
-    return true;
 }
